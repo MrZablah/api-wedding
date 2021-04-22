@@ -1,6 +1,7 @@
 custom: ${file(./config/variables.yml)}
 
-service: ${self:custom.Stack_Name}-${self:custom.Region}
+# Note: This was change bc of the serverless dashboard was: ${self:custom.Stack_Name}-${self:custom.Region}
+service: api-wedding-us-east-1
 
 # app and org for use with dashboard.serverless.com
 app: api-wedding
