@@ -12,6 +12,10 @@ org: mrzablah
 # Check out our docs for more details
 frameworkVersion: ">=2.0.0 <3.0.0"
 
+# Plugins
+plugins:
+  - serverless-domain-manager
+
 provider:
   name: aws
   runtime: nodejs12.x
@@ -45,7 +49,7 @@ layers:
 
 functions:
   create:
-    handler: functions/create.create
+    handler: Functions/create.create
     role: { Fn::GetAtt: [ ApiWeddingRole, Arn ] }
     layers:
       - { Ref: ApiLambdaLayer }
@@ -60,28 +64,6 @@ functions:
           method: post
     tags:
       FUNCTION: create
-
-
-#  update:
-#    handler: functions/update.handler
-#    role: { Fn::GetAtt: [ ApiWeddingRole, Arn ] }
-#    layers:
-#      - { Ref: ApiLambdaLayer }
-#    package:
-#      exclude:
-#        - "**/**"
-#      include:
-#        - functions/update.js
-#    events:
-#      - http:
-#          cors: true
-#          path: v1/guest
-#          method: put
-#          request:
-#            schema:
-#              application/json: ${file(./request-schema.json)}
-#    tags:
-#      FUNCTION: update
 
 # CloudFormation resource templates here
 resources: ${file(./serverless.resources.yml)}

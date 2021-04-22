@@ -8,6 +8,13 @@ Tag_Project: MandMwedding
 DynamoDB_Table: WeddingList
 Read_Units: 1
 Write_Units: 1
+# ------------ Domain Options ------------ #
+customDomain:
+  domainName: apiwed.mrzablah.com
+  certificateName: mrzablah.com
+  basePath: ''
+  stage: ${self:custom.stage}
+  createRoute53Record: true
 # ------------ Optional Variables ------------ #
 Region: us-east-1
 Stage: prod
