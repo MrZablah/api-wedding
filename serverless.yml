@@ -45,7 +45,7 @@ layers:
 
 functions:
   create:
-    handler: "functions/create.handler"
+    handler: functions/create.create
     role: { Fn::GetAtt: [ ApiWeddingRole, Arn ] }
     layers:
       - { Ref: ApiLambdaLayer }

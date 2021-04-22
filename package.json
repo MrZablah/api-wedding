@@ -4,7 +4,8 @@
   "description": "Wedding Back-end for M&amp;M",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "preinstall": "cd Lib/nodejs && npm install"
   },
   "repository": {
     "type": "git",

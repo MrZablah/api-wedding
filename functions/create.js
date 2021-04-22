@@ -3,7 +3,7 @@
 const { putItem } = require('/opt/nodejs/common/dynamoDB');
 const { formatToDynamo } = require('/opt/nodejs/common/helpers');
 
-exports.handler = async event => {
+exports.create = async event => {
   try {
     console.log(JSON.stringify(event));
     let res = await putItem(formatToDynamo({
