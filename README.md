@@ -17,3 +17,8 @@ sls delete_domain
 # Then
 sls destroy
 ````
+
+## Extra commands
+```commandline
+serverless package
+```

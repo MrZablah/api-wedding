@@ -4,10 +4,6 @@ custom: ${file(./config/variables.yml)}
 # ${self:custom.Stack_Name}-${self:custom.Region}
 service: api-wedding-us-east-1
 
-# app and org for use with dashboard.serverless.com
-app: api-wedding
-org: mrzablah
-
 # You can pin your service to only deploy with a specific Serverless version
 # Check out our docs for more details
 frameworkVersion: ">=2.0.0 <3.0.0"
@@ -49,14 +45,14 @@ layers:
 
 functions:
   create:
-    handler: handlers/create.create
+    handler: Functions/create.handler
     role: { Fn::GetAtt: [ ApiWeddingRole, Arn ] }
     layers:
       - { Ref: ApiLambdaLayer }
     package:
       patterns:
-        - "!**/**"
-        - "handlers/create.js"
+        - '!**'
+        - 'Functions/create.js'
     events:
       - http:
           cors: true
