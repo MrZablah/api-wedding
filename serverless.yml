@@ -1,0 +1,85 @@
+custom: ${file(./config/variables.yml)}
+
+service: ${self:custom.Stack_Name}-${self:custom.Region}
+
+# app and org for use with dashboard.serverless.com
+app: api-wedding
+org: mrzablah
+
+# You can pin your service to only deploy with a specific Serverless version
+# Check out our docs for more details
+frameworkVersion: ">=2.0.0 <3.0.0"
+
+provider:
+  name: aws
+  runtime: nodejs12.x
+  lambdaHashingVersion: 20201221
+  profile: zablah
+  stage: ${self:custom.Stage}
+  region: ${self:custom.Region}
+  timeout: ${self:custom.Timeout}
+  memorySize: ${self:custom.MemorySize}
+  logRetentionInDays: ${self:custom.LogRetention}
+  deploymentBucket:
+    name: serverless-framework.zablah.${self:custom.Region}.deploys
+  tags:
+    STACK: ${self:service}
+    App: ${self:custom.Tag_App}
+    Project: ${self:custom.Tag_Project}
+  environment:
+    DYNAMO_TABLE: ${self:custom.DynamoDB_Table}
+
+# Packaging information here
+package:
+  individually: true
+
+# Layer Information here
+layers:
+  api:
+    description: "some node module for the api"
+    path: Lib
+    compatibleRuntimes:
+      - nodejs12.x
+
+functions:
+  create:
+    handler: "functions/create.handler"
+    role: { Fn::GetAtt: [ ApiWeddingRole, Arn ] }
+    layers:
+      - { Ref: ApiLambdaLayer }
+    package:
+      patterns:
+        - "!**/**"
+        - "functions/create.js"
+    events:
+      - http:
+          cors: true
+          path: v1/guest
+          method: post
+    tags:
+      FUNCTION: create
+
+
+#  update:
+#    handler: functions/update.handler
+#    role: { Fn::GetAtt: [ ApiWeddingRole, Arn ] }
+#    layers:
+#      - { Ref: ApiLambdaLayer }
+#    package:
+#      exclude:
+#        - "**/**"
+#      include:
+#        - functions/update.js
+#    events:
+#      - http:
+#          cors: true
+#          path: v1/guest
+#          method: put
+#          request:
+#            schema:
+#              application/json: ${file(./request-schema.json)}
+#    tags:
+#      FUNCTION: update
+
+# CloudFormation resource templates here
+resources: ${file(./serverless.resources.yml)}

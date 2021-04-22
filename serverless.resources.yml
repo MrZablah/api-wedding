@@ -1,0 +1,93 @@
+Resources:
+  DynamoTable:
+    Type: AWS::DynamoDB::Table
+    DeletionPolicy: Delete # 'Delete' will delete de if stack is remove, 'Retain' will not.
+    Properties:
+      TableName: ${self:custom.DynamoDB_Table}
+      AttributeDefinitions:
+        - AttributeName: Id
+          AttributeType: S
+      KeySchema:
+        - AttributeName: Id
+          KeyType: HASH
+      ProvisionedThroughput:
+        ReadCapacityUnits: ${self:custom.Read_Units}
+        WriteCapacityUnits: ${self:custom.Write_Units}
+      Tags:
+        - Key: "STACK"
+          Value: ${self:service}
+        - Key: "Name"
+          Value: ${self:custom.DynamoDB_Table}
+        - Key: "App"
+          Value: ${self:custom.Tag_App}
+        - Key: "Project"
+          Value: ${self:custom.Tag_Project}
+
+  DynamoScalingRole:
+    Type: AWS::IAM::Role
+    Properties:
+      AssumeRolePolicyDocument:
+        Version: "2012-10-17"
+        Statement:
+          - Effect: "Allow"
+            Principal:
+              Service:
+                - application-autoscaling.amazonaws.com
+            Action:
+              - "sts:AssumeRole"
+      Path: "/"
+      Policies:
+        - PolicyName: "root"
+          PolicyDocument:
+            Version: "2012-10-17"
+            Statement:
+              - Effect: "Allow"
+                Action:
+                  - "dynamodb:DescribeTable"
+                  - "logs:*"
+                  - "dynamodb:UpdateTable"
+                  - "cloudwatch:PutMetricAlarm"
+                  - "cloudwatch:DescribeAlarms"
+                  - "cloudwatch:GetMetricStatistics"
+                  - "cloudwatch:SetAlarmState"
+                  - "cloudwatch:DeleteAlarms"
+                Resource: "*"
+
+  ApiWeddingRole:
+    Type: AWS::IAM::Role
+    Properties:
+      RoleName: ${self:service}-api-wedding-role
+      AssumeRolePolicyDocument:
+        Version: '2012-10-17'
+        Statement:
+          - Effect: Allow
+            Principal:
+              Service: lambda.amazonaws.com
+            Action: 'sts:AssumeRole'
+      Policies:
+        - PolicyName: ${self:service}-api-wedding-policy
+          PolicyDocument:
+            Version: '2012-10-17'
+            Statement:
+              - Effect: Allow
+                Action:
+                  - lambda:GetLayerVersion
+                Resource: { Ref: ApiLambdaLayer }
+              - Effect: Allow
+                Action:
+                  - logs:*
+                Resource: "*"
+              - Effect: Allow
+                Action:
+                  - "dynamodb:BatchGetItem"
+                  - "dynamodb:GetItem"
+                  - "dynamodb:Query"
+                  - "dynamodb:Scan"
+                  - "dynamodb:BatchWriteItem"
+                  - "dynamodb:PutItem"
+                  - "dynamodb:UpdateItem"
+                  - "dynamodb:DeleteItem"
+                Resource:
+                  'Fn::GetAtt':
+                    - DynamoTable
+                    - Arn

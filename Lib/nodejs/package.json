@@ -1,0 +1,11 @@
+{
+  "name": "modules-api",
+  "version": "1.0.0",
+  "description": "This project was created with serverless framework to work specificity on AWS",
+  "main": "index.js",
+  "author": "Zablah",
+  "license": "ISC",
+  "dependencies": {
+    "moment": "^2.24.0"
+  }
+}

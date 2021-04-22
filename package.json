@@ -1,0 +1,22 @@
+{
+  "name": "apiweding",
+  "version": "1.0.0",
+  "description": "Wedding Back-end for M&amp;M",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MrZablah/ApiWeding.git"
+  },
+  "author": "Zablah <miguel12979@gmail.com>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/MrZablah/ApiWeding/issues"
+  },
+  "homepage": "https://github.com/MrZablah/ApiWeding#readme",
+  "devDependencies": {
+    "aws-sdk": "^2.890.0"
+  }
+}

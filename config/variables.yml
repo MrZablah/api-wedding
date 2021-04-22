@@ -1,0 +1,16 @@
+# --------------- Stack Variables --------------- #
+# Don't use Uppercase or special character
+Stack_Name: api-wedding
+# -------------- Tags Variables -------------- #
+Tag_App: api-wedding
+Tag_Project: MandMwedding
+# --------------- DynamoDB Settings --------------- #
+DynamoDB_Table: WeddingList
+Read_Units: 1
+Write_Units: 1
+# ------------ Optional Variables ------------ #
+Region: us-east-1
+Stage: prod
+Timeout: 5
+MemorySize: 128
+LogRetention: 5
