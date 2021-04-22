@@ -13,7 +13,7 @@ customDomain:
   domainName: apiwed.mrzablah.com
   certificateName: mrzablah.com
   basePath: ''
-  stage: ${self:custom.stage}
+  stage: ${self:provider.stage}
   createRoute53Record: true
 # ------------ Optional Variables ------------ #
 Region: us-east-1
