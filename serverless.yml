@@ -49,14 +49,14 @@ layers:
 
 functions:
   create:
-    handler: Functions/create.create
+    handler: handlers/create.create
     role: { Fn::GetAtt: [ ApiWeddingRole, Arn ] }
     layers:
       - { Ref: ApiLambdaLayer }
     package:
       patterns:
         - "!**/**"
-        - "functions/create.js"
+        - "handlers/create.js"
     events:
       - http:
           cors: true

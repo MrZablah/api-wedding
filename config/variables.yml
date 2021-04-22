@@ -12,9 +12,8 @@ Write_Units: 1
 customDomain:
   domainName: apiwed.mrzablah.com
   certificateName: mrzablah.com
-  basePath: ''
   stage: ${self:provider.stage}
-  createRoute53Record: true
+  securityPolicy: tls_1_2
 # ------------ Optional Variables ------------ #
 Region: us-east-1
 Stage: prod

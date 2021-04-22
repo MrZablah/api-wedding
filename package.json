@@ -18,9 +18,8 @@
   },
   "homepage": "https://github.com/MrZablah/ApiWeding#readme",
   "devDependencies": {
-    "aws-sdk": "^2.890.0"
-  },
-  "dependencies": {
+    "aws-sdk": "^2.890.0",
     "serverless-domain-manager": "^5.1.0"
-  }
+  },
+  "dependencies": {}
 }
