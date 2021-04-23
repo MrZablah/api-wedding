@@ -6,7 +6,7 @@ Resources:
       TableName: ${self:custom.DynamoDB_Table}
       AttributeDefinitions:
         - AttributeName: Id
-          AttributeType: S
+          AttributeType: N
       KeySchema:
         - AttributeName: Id
           KeyType: HASH

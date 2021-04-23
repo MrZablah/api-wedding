@@ -5,7 +5,7 @@ Stack_Name: api-wedding
 Tag_App: api-wedding
 Tag_Project: MandMwedding
 # --------------- DynamoDB Settings --------------- #
-DynamoDB_Table: WeddingList
+DynamoDB_Table: api-wedding-list
 Read_Units: 1
 Write_Units: 1
 # ------------ Domain Options ------------ #

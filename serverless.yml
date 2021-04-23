@@ -61,5 +61,64 @@ functions:
     tags:
       FUNCTION: create
 
+  update:
+    handler: Functions/update.handler
+    role: { Fn::GetAtt: [ ApiWeddingRole, Arn ] }
+    layers:
+      - { Ref: ApiLambdaLayer }
+    package:
+      patterns:
+        - '!**'
+        - 'Functions/update.js'
+    events:
+      - http:
+          cors: true
+          path: v1/guest
+          method: put
+    tags:
+      FUNCTION: update
+
+  delete:
+    handler: Functions/delete.handler
+    role: { Fn::GetAtt: [ ApiWeddingRole, Arn ] }
+    layers:
+      - { Ref: ApiLambdaLayer }
+    package:
+      patterns:
+        - '!**'
+        - 'Functions/delete.js'
+    events:
+      - http:
+          cors: true
+          path: v1/guest
+          method: delete
+          request:
+            parameters:
+              querystrings:
+                id: true
+    tags:
+      FUNCTION: delete
+
+  get:
+    handler: Functions/get.handler
+    role: { Fn::GetAtt: [ ApiWeddingRole, Arn ] }
+    layers:
+      - { Ref: ApiLambdaLayer }
+    package:
+      patterns:
+        - '!**'
+        - 'Functions/get.js'
+    events:
+      - http:
+          cors: true
+          path: v1/guest
+          method: get
+          request:
+            parameters:
+              querystrings:
+                id: true
+    tags:
+      FUNCTION: get
+
 # CloudFormation resource templates here
 resources: ${file(./serverless.resources.yml)}
