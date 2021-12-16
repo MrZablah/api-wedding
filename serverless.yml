@@ -95,7 +95,7 @@ functions:
           request:
             parameters:
               querystrings:
-                id: true
+                Id: true
     tags:
       FUNCTION: delete
 
@@ -116,9 +116,9 @@ functions:
           request:
             parameters:
               querystrings:
-                id: true
+                Id: true
     tags:
       FUNCTION: get
 
-# CloudFormation resource templates here
+# CloudFormation's resource templates here
 resources: ${file(./serverless.resources.yml)}

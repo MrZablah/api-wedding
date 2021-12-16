@@ -10,7 +10,7 @@ Read_Units: 1
 Write_Units: 1
 # ------------ Domain Options ------------ #
 customDomain:
-  domainName: apiwed.mrzablah.com
+  domainName: api.mymourwedding.com
   certificateName: mrzablah.com
   stage: ${self:provider.stage}
   securityPolicy: tls_1_2

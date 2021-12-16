@@ -9,7 +9,7 @@ exports.handler = async event => {
     await val(guestJson);
     guestJson["Id"] = Number(guestJson.Id);
     let guest = await getItem("Id", guestJson);
-    return formatRes(200, {
+    return formatRes(!Object.keys(guest).length ? 404 : 200, {
       message: `Guest${!Object.keys(guest).length ? " not" : ""} found`,
       guest: guest["Item"]
     });
